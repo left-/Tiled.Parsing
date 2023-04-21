@@ -22,12 +22,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace Tiled.Parsing.Models
 {
-    /// <summary>
-    /// Represents a point shape
-    /// </summary>
     public class TiledPoint
     {
     }

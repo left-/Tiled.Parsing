@@ -22,27 +22,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace Tiled.Parsing.Models
 {
-    /// <summary>
-    /// Represents a property object in both tilesets, maps, layers and objects. Values are all in string but you can use the 'type' property for conversions
-    /// </summary>
     public class TiledProperty
     {
-        /// <summary>
-        /// The property name or key in string format
-        /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// The property type as used in Tiled. Can be bool, number, string, ...
-        /// </summary>
         public TiledPropertyType Type { get; set; }
-
-        /// <summary>
-        /// The value in string format
-        /// </summary>
         public string Value { get; set; }
     }
 }

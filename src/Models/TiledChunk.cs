@@ -22,42 +22,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace Tiled.Parsing.Models
 {
-    /// <summary>
-    /// Represents a tile layer chunk when the map is infinite
-    /// </summary>
     public class TiledChunk
     {
-        /// <summary>
-        /// The chunk's x position
-        /// </summary>
         public int X { get; set; }
-
-        /// <summary>
-        /// The chunk's y position
-        /// </summary>
         public int Y { get; set; }
-
-        /// <summary>
-        /// The chunk's width
-        /// </summary>
         public int Width { get; set; }
-
-        /// <summary>
-        /// The chunk's height
-        /// </summary>
         public int Height { get; set; }
-
-        /// <summary>
-        /// The chunk's data is similar to the data array in the TiledLayer class
-        /// </summary>
         public int[] Data { get; set; }
-
-        /// <summary>
-        /// The chunk's data rotation flags are similar to the data rotation flags array in the TiledLayer class
-        /// </summary>
         public byte[] DataRotationFlags { get; set; }
     }
 }

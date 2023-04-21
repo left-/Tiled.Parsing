@@ -32,92 +32,24 @@ using Tiled.Parsing.Models;
 
 namespace Tiled.Parsing
 {
-    /// <summary>
-    /// Represents a Tiled tileset
-    /// </summary>
     public class TiledTileset
     {
-        /// <summary>
-        /// The Tiled version used to create this tileset
-        /// </summary>
         public string TiledVersion { get; set; }
-
-        /// <summary>
-        /// The tileset name
-        /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// The tileset class
-        /// </summary>
         public string Class { get; set; }
-
-        /// <summary>
-        /// The tile width in pixels
-        /// </summary>
         public int TileWidth { get; set; }
-
-        /// <summary>
-        /// The tile height in pixels
-        /// </summary>
         public int TileHeight { get; set; }
-
-        /// <summary>
-        /// The total amount of tiles
-        /// </summary>
         public int TileCount { get; set; }
-
-        /// <summary>
-        /// The amount of horizontal tiles
-        /// </summary>
         public int Columns { get; set; }
-
-        /// <summary>
-        /// The image definition used by the tileset
-        /// </summary>
         public TiledImage Image { get; set; }
-
-        /// <summary>
-        /// The amount of spacing between the tiles in pixels
-        /// </summary>
         public int Spacing { get; set; }
-
-        /// <summary>
-        /// The amount of margin between the tiles in pixels
-        /// </summary>
         public int Margin { get; set; }
-
-        /// <summary>
-        /// An array of tile definitions
-        /// </summary>
-        /// <remarks>Not all tiles within a tileset have definitions. Only those with properties, animations, terrains, ...</remarks>
         public TiledTile[] Tiles { get; set; }
-
-        /// <summary>
-        /// An array of tileset properties
-        /// </summary>
         public TiledProperty[] Properties { get; set; }
-
-        /// <summary>
-        /// The tile offset in pixels
-        /// </summary>
         public TiledOffset Offset { get; set; }
 
-        /// <summary>
-        /// Returns an empty instance of TiledTileset
-        /// </summary>
-        public TiledTileset()
-        {
-        }
-
-        /// <summary>
-        /// Loads a tileset in TSX format and parses it
-        /// </summary>
-        /// <param name="path">The file path of the TSX file</param>
-        /// <exception cref="TiledException">Thrown when the file could not be found or parsed</exception>
         public TiledTileset(string path)
         {
-            // Check the file
             if (!File.Exists(path)) throw new TiledException($"{path} not found");
 
             var content = File.ReadAllText(path);
@@ -128,11 +60,6 @@ namespace Tiled.Parsing
                 throw new TiledException("Unsupported file format");
         }
 
-        /// <summary>
-        /// Loads a tileset in TSX format and parses it
-        /// </summary>
-        /// <param name="stream">The file stream of the TSX file</param>
-        /// <exception cref="TiledException">Thrown when the file could not be parsed</exception>
         public TiledTileset(Stream stream)
         {
             var streamReader = new StreamReader(stream);
@@ -140,11 +67,6 @@ namespace Tiled.Parsing
             ParseXml(content);
         }
 
-        /// <summary>
-        /// Can be used to parse the content of a TSX tileset manually instead of loading it using the constructor
-        /// </summary>
-        /// <param name="xml">The tmx file content as string</param>
-        /// <exception cref="TiledException"></exception>
         public void ParseXml(string xml)
         {
             try

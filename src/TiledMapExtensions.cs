@@ -19,11 +19,6 @@ namespace Tiled.Parsing
 {
     public static class TiledMapExtensions
     {
-        /// <summary>
-        /// Locates the right TiledMapTileset object for you within the Tilesets array
-        /// </summary>
-        /// <param name="gid">A value from the TiledLayer.data array</param>
-        /// <returns>An element within the Tilesets array or null if no match was found</returns>
         public static TiledMapTileset GetTiledMapTileset(this TiledMap map, int gid)
         {
             if (map.Tilesets == null) return null;
@@ -44,11 +39,6 @@ namespace Tiled.Parsing
             return new TiledMapTileset();
         }
 
-        /// <summary>
-        /// Loads external tilesets and matches them to firstGids from elements within the Tilesets array
-        /// </summary>
-        /// <param name="src">The folder where the TiledMap file is located</param>
-        /// <returns>A dictionary where the key represents the firstGid of the associated TiledMapTileset and the value the TiledTileset object</returns>
         public static Dictionary<int, TiledTileset> GetTiledTilesets(this TiledMap map, string src)
         {
             var tilesets = new Dictionary<int, TiledTileset>();
@@ -73,14 +63,6 @@ namespace Tiled.Parsing
             return tilesets;
         }
 
-        /// <summary>
-        /// Locates a specific TiledTile object
-        /// </summary>
-        /// <param name="mapTileset">An element within the Tilesets array</param>
-        /// <param name="tileset">An instance of the TiledTileset class</param>
-        /// <param name="gid">An element from within a TiledLayer.data array</param>
-        /// <returns>An entry of the TiledTileset.tiles array or null if none of the tile id's matches the gid</returns>
-        /// <remarks>Tip: Use the GetTiledMapTileset and GetTiledTilesets methods for retrieving the correct TiledMapTileset and TiledTileset objects</remarks>
         public static TiledTile GetTiledTile(this TiledMap map, TiledMapTileset mapTileset, TiledTileset tileset,
             int gid)
         {
@@ -92,13 +74,6 @@ namespace Tiled.Parsing
             return null;
         }
 
-        /// <summary>
-        /// This method can be used to figure out the source rect on a Tileset image for rendering tiles.
-        /// </summary>
-        /// <param name="mapTileset"></param>
-        /// <param name="tileset"></param>
-        /// <param name="gid"></param>
-        /// <returns>An instance of the class TiledSourceRect that represents a rectangle. Returns null if the provided gid was not found within the tileset.</returns>
         public static TiledSourceRect GetSourceRect(this TiledMap map, TiledMapTileset mapTileset, TiledTileset tileset,
             int gid)
         {
@@ -133,13 +108,6 @@ namespace Tiled.Parsing
             return null;
         }
 
-        /// <summary>
-        /// Checks is a tile is flipped horizontally
-        /// </summary>
-        /// <param name="layer">An entry of the TiledMap.layers array</param>
-        /// <param name="tileHor">The tile's horizontal position</param>
-        /// <param name="tileVert">The tile's vertical position</param>
-        /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public static bool IsTileFlippedHorizontal(this TiledMap map, TiledLayer layer, int tileHor, int tileVert)
         {
             if (layer.Type != TiledLayerType.TileLayer)
@@ -148,21 +116,10 @@ namespace Tiled.Parsing
             return map.IsTileFlippedHorizontal(layer, tileHor + tileVert * layer.Width);
         }
 
-        /// <summary>
-        /// Checks is a tile is flipped horizontally
-        /// </summary>
-        /// <param name="layer">An entry of the TiledMap.layers array</param>
-        /// <param name="dataIndex">An index of the TiledLayer.data array</param>
-        /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public static bool IsTileFlippedHorizontal(this TiledMap map, TiledLayer layer, int dataIndex)
             => (layer.DataRotationFlags[dataIndex] &
                 (TiledMap.FlippedHorizontallyFlag >> TiledMap.ShiftFlipFlagToByte)) > 0;
 
-        /// <summary>
-        /// Checks is a tile linked to an object is flipped horizontally
-        /// </summary>
-        /// <param name="tiledObject">The tiled object</param>
-        /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public static bool IsTileFlippedHorizontal(this TiledMap map, TiledObject tiledObject)
         {
             if (tiledObject.Gid == 0) throw new TiledException("Tiled object not linked to a tile");
@@ -171,13 +128,6 @@ namespace Tiled.Parsing
                    0;
         }
 
-        /// <summary>
-        /// Checks is a tile is flipped vertically
-        /// </summary>
-        /// <param name="layer">An entry of the TiledMap.layers array</param>
-        /// <param name="tileHor">The tile's horizontal position</param>
-        /// <param name="tileVert">The tile's vertical position</param>
-        /// <returns>True if the tile was flipped vertically or False if not</returns>
         public static bool IsTileFlippedVertical(this TiledMap map, TiledLayer layer, int tileHor, int tileVert)
         {
             if (layer.Type != TiledLayerType.TileLayer)
@@ -186,22 +136,10 @@ namespace Tiled.Parsing
             return map.IsTileFlippedVertical(layer, tileHor + tileVert * layer.Width);
         }
 
-        /// <summary>
-        /// Checks is a tile is flipped vertically
-        /// </summary>
-        /// <param name="layer">An entry of the TiledMap.layers array</param>
-        /// <param name="dataIndex">An index of the TiledLayer.data array</param>
-        /// <returns>True if the tile was flipped vertically or False if not</returns>
         public static bool IsTileFlippedVertical(this TiledMap map, TiledLayer layer, int dataIndex)
             => (layer.DataRotationFlags[dataIndex] & (TiledMap.FlippedVerticallyFlag >> TiledMap.ShiftFlipFlagToByte)) >
                0;
 
-        /// <summary>
-        /// Checks is a tile linked to an object is flipped vertically
-        /// </summary>
-        /// <param name="layer">An entry of the TiledMap.layers array</param>
-        /// <param name="tiledObject">The tiled object</param>
-        /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public static bool IsTileFlippedVertical(this TiledMap map, TiledObject tiledObject)
         {
             if (tiledObject.Gid == 0) throw new TiledException("Tiled object not linked to a tile");
@@ -210,13 +148,6 @@ namespace Tiled.Parsing
                    0;
         }
 
-        /// <summary>
-        /// Checks is a tile is flipped diagonally
-        /// </summary>
-        /// <param name="layer">An entry of the TiledMap.layers array</param>
-        /// <param name="tileHor">The tile's horizontal position</param>
-        /// <param name="tileVert">The tile's vertical position</param>
-        /// <returns>True if the tile was flipped diagonally or False if not</returns>
         public static bool IsTileFlippedDiagonal(this TiledMap map, TiledLayer layer, int tileHor, int tileVert)
         {
             if (layer.Type != TiledLayerType.TileLayer)
@@ -225,21 +156,10 @@ namespace Tiled.Parsing
             return map.IsTileFlippedDiagonal(layer, tileHor + tileVert * layer.Width);
         }
 
-        /// <summary>
-        /// Checks is a tile is flipped diagonally
-        /// </summary>
-        /// <param name="layer">An entry of the TiledMap.layers array</param>
-        /// <param name="dataIndex">An index of the TiledLayer.data array</param>
-        /// <returns>True if the tile was flipped diagonally or False if not</returns>
         public static bool IsTileFlippedDiagonal(this TiledMap map, TiledLayer layer, int dataIndex)
             => (layer.DataRotationFlags[dataIndex] & (TiledMap.FlippedDiagonallyFlag >> TiledMap.ShiftFlipFlagToByte)) >
                0;
 
-        /// <summary>
-        /// Checks is a tile linked to an object is flipped diagonally
-        /// </summary>
-        /// <param name="tiledObject">The tiled object</param>
-        /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public static bool IsTileFlippedDiagonal(this TiledMap map, TiledObject tiledObject)
         {
             if (tiledObject.Gid == 0) throw new TiledException("Tiled object not linked to a tile");

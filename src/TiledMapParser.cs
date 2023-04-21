@@ -34,11 +34,6 @@ namespace Tiled.Parsing
 {
     public class TiledMapParser
     {
-        /// <summary>
-        /// Loads a Tiled map in TMX format and parses it
-        /// </summary>
-        /// <param name="stream">Stream of opened tmx file</param>
-        /// <exception cref="TiledException">Thrown when the map could not be loaded</exception>
         public TiledMap Parse(Stream stream)
         {
             using var streamReader = new StreamReader(stream);
@@ -46,12 +41,6 @@ namespace Tiled.Parsing
             return ParseXml(content);
         }
 
-        /// <summary>
-        /// Loads a Tiled map in TMX format and parses it
-        /// </summary>
-        /// <param name="path">The path to the tmx file</param>
-        /// <exception cref="ArgumentException">Thrown when the map could not be loaded</exception>
-        /// <exception cref="TiledException">Thrown when the map could not be loaded or is not in a correct format</exception>
         public TiledMap Parse(string path)
         {
             if (!File.Exists(path)) throw new ArgumentException($"{path} not found");
@@ -62,12 +51,6 @@ namespace Tiled.Parsing
                 : throw new TiledException("Unsupported file format");
         }
 
-
-        /// <summary>
-        /// Can be used to parse the content of a TMX map manually instead of loading it using the constructor
-        /// </summary>
-        /// <param name="xml">The tmx file content as string</param>
-        /// <exception cref="TiledException"></exception>
         public TiledMap ParseXml(string xml)
         {
             var map = new TiledMap();

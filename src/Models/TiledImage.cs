@@ -22,27 +22,12 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace Tiled.Parsing.Models
 {
-    /// <summary>
-    /// Represents an image
-    /// </summary>
     public class TiledImage
     {
-        /// <summary>
-        /// The image width
-        /// </summary>
         public int Width { get; set; }
-
-        /// <summary>
-        /// The image height
-        /// </summary>
         public int Height { get; set; }
-
-        /// <summary>
-        /// The image source path
-        /// </summary>
         public string Source { get; set; }
     }
 }
