@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+using Tiled.Parsing.Commons;
 using Tiled.Parsing.Models;
 
 namespace Tiled.Parsing

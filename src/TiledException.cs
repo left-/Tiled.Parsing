@@ -3,7 +3,7 @@ using System;
 namespace Tiled.Parsing
 {
     /// <summary>
-    /// Represents an exception only thrown by TiledCS
+    /// Represents an exception only thrown by the library
     /// </summary>
     public class TiledException : Exception
     {
@@ -13,8 +13,8 @@ namespace Tiled.Parsing
         /// <param name="message">The exception message</param>
         public TiledException(string message) : base(message)
         {
-            
         }
+
         /// <summary>
         /// Returns an instance of TiledException
         /// </summary>
@@ -22,7 +22,6 @@ namespace Tiled.Parsing
         /// <param name="inner">The inner exception</param>
         public TiledException(string message, Exception inner) : base(message, inner)
         {
-            
         }
     }
 }
