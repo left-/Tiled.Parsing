@@ -1,4 +1,4 @@
-namespace TiledCS
+namespace Tiled.Parsing
 {
     /// <summary>
     /// Represents an element within the Tilesets array of a TiledMap object

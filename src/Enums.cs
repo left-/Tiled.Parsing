@@ -1,4 +1,4 @@
-namespace TiledCS
+namespace Tiled.Parsing
 {
     /// <summary>
     /// Represents the layer type

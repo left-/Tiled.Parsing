@@ -1,9 +1,9 @@
 using System.Linq;
 
-namespace TiledCS
+namespace Tiled.Parsing
 {
     /// <summary>
-    /// Defines all extension methods used within TiledCS
+    /// Defines all extension methods used within Tiled.Parsing
     /// </summary>
     public static class Extensions
     {

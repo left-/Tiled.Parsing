@@ -1,11 +1,9 @@
-> **Important!** It is with great sadness that I have to anounce that I no longer can find enough time to care for the project as it is. Not only do I personally no longer work with C#, there are other projects that require my attention.
-
-# TiledCS
-TiledCS is a .NET library for loading Tiled maps and tilesets. It supports only the _TMX_ and _TSX_ file formats. The library requires no 3rd-party dependencies. This way the library can be used with popular game engines like Unity3D, MonoGame and Godot.
+# Tiled.Parsing
+Tiled.ParsingCS is a .NET library for loading Tiled maps and tilesets. It supports only the _TMX_ and _TSX_ file formats. The library requires no 3rd-party dependencies. This way the library can be used with popular game engines like Unity3D, MonoGame and Godot.
 
 ## Installation
 ```
-dotnet add package tiledcs
+dotnet add package tiled.parsing
 ```
 
 ## Usage
@@ -13,7 +11,7 @@ dotnet add package tiledcs
 using System;
 using System.IO;
 using Newtonsoft.Json;
-using TiledCS;
+using Tiled.Parsing;
 
 // For loading maps in XML format
 var map = new TiledMap("path-to-map.tmx");
@@ -102,7 +100,7 @@ foreach (var layer in tileLayers)
 ```
 
 ### MonoGame
-As you already know, TiledCS is a generic library which does not aim at specific frameworks or libraries. That said, I have been receiving lots of requests for an example on MonoGame. However, **I do not use MonoGame**. So it is up to the community to come up with an example on how to use TiledCS within monogame. And they did:
+As you already know, Tiled.Parsing is a generic library which does not aim at specific frameworks or libraries. That said, I have been receiving lots of requests for an example on MonoGame. However, **I do not use MonoGame**. So it is up to the community to come up with an example on how to use TiledCS within monogame. And they did:
 
 * https://github.com/Temeez/TiledCS-MonoGame-Example
 * https://github.com/ironcutter24/TiledCS-example-MonoGame
@@ -110,7 +108,7 @@ As you already know, TiledCS is a generic library which does not aim at specific
 > **Note!** Temeez has mentioned he is no longer actively working with C# anymore. So while the example may or may not work, it is not actively maintained anymore. Be aware of that.
 
 ## Building
-You need **.NET 6** to compile TiledCS as it makes use of modern C# features that may or may not be included in earlier versions.
+You need **.NET 6** to compile Tiled.Parsing as it makes use of modern C# features that may or may not be included in earlier versions.
 
 ## Version support
 If you want to know what package supports your version of Tiled, please read the package's description.

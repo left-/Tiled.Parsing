@@ -4,8 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
+using TiledCS;
 
-namespace TiledCS
+namespace Tiled.Parsing
 {
     /// <summary>
     /// Represents a Tiled map

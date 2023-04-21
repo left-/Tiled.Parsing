@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+using TiledCS;
 
-namespace TiledCS
+namespace Tiled.Parsing
 {
     /// <summary>
     /// Represents a Tiled tileset
