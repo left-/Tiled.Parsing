@@ -8,11 +8,11 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The x offset in pixels
         /// </summary>
-        public int x;
-        
+        public int X { get; set; }
+
         /// <summary>
         /// The y offset in pixels
         /// </summary>
-        public int y;
+        public int Y { get; set; }
     }
 }

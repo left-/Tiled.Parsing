@@ -21,53 +21,53 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The object id
         /// </summary>
-        public int id;
+        public int Id { get; set; }
 
         /// <summary>
         /// The object's name
         /// </summary>
-        public string name;
+        public string Name { get; set; }
 
         /// <summary>
         /// The object type if defined. Null if none was set.
         /// </summary>
-        public string type;
+        public string Type { get; set; }
 
         /// <summary>
         /// The object's class
         /// </summary>
-        public string @class;
+        public string Class { get; set; }
 
         /// <summary>
         /// The object's x position in pixels
         /// </summary>
-        public float x;
+        public float X { get; set; }
 
         /// <summary>
         /// The object's y position in pixels
         /// </summary>
-        public float y;
+        public float Y { get; set; }
 
         /// <summary>
         /// The object's rotation
         /// </summary>
-        public float rotation;
+        public float Rotation { get; set; }
 
         /// <summary>
         /// The object's width in pixels
         /// </summary>
-        public float width;
+        public float Width { get; set; }
 
         /// <summary>
         /// The object's height in pixels
         /// </summary>
-        public float height;
+        public float Height { get; set; }
 
         /// <summary>
         /// The tileset gid when the object is linked to a tile
         /// </summary>
-        public int gid;
-        
+        public int Gid { get; set; }
+
         /// <summary>
         /// A byte which stores the rotation flags of the tile linked to the object's gid.
         /// Bit 3 is horizontal flip,
@@ -75,26 +75,26 @@ namespace Tiled.Parsing.Models
         /// bit 1 is (anti) diagonal flip.
         /// Is null when the layer is not a tilelayer.
         /// </summary>
-        public byte dataRotationFlag;
+        public byte DataRotationFlag { get; set; }
 
         /// <summary>
         /// An array of properties. Is null if none were defined.
         /// </summary>
-        public TiledProperty[] properties;
+        public TiledProperty[] Properties { get; set; }
 
         /// <summary>
         /// If an object was set to a polygon shape, this property will be set and can be used to access the polygon's data
         /// </summary>
-        public TiledPolygon polygon;
+        public TiledPolygon Polygon { get; set; }
 
         /// <summary>
         /// If an object was set to a point shape, this property will be set
         /// </summary>
-        public TiledPoint point;
+        public TiledPoint Point { get; set; }
 
         /// <summary>
         /// If an object was set to an ellipse shape, this property will be set
         /// </summary>
-        public TiledEllipse ellipse;
+        public TiledEllipse Ellipse { get; set; }
     }
 }

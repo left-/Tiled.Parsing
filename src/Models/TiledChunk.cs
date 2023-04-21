@@ -21,31 +21,31 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The chunk's x position
         /// </summary>
-        public int x;
-        
+        public int X { get; set; }
+
         /// <summary>
         /// The chunk's y position
         /// </summary>
-        public int y;
-        
+        public int Y { get; set; }
+
         /// <summary>
         /// The chunk's width
         /// </summary>
-        public int width;
-        
+        public int Width { get; set; }
+
         /// <summary>
         /// The chunk's height
         /// </summary>
-        public int height;
-        
+        public int Height { get; set; }
+
         /// <summary>
         /// The chunk's data is similar to the data array in the TiledLayer class
         /// </summary>
-        public int[] data;
-        
+        public int[] Data { get; set; }
+
         /// <summary>
         /// The chunk's data rotation flags are similar to the data rotation flags array in the TiledLayer class
         /// </summary>
-        public byte[] dataRotationFlags;
+        public byte[] DataRotationFlags { get; set; }
     }
 }

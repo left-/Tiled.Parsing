@@ -21,77 +21,77 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The layer id
         /// </summary>
-        public int id;
+        public int Id { get; set; }
 
         /// <summary>
         /// The layer name
         /// </summary>
-        public string name;
+        public string Name { get; set; }
 
         /// <summary>
         /// Total horizontal tiles
         /// </summary>
-        public int width;
+        public int Width { get; set; }
 
         /// <summary>
         /// Total vertical tiles
         /// </summary>
-        public int height;
+        public int Height { get; set; }
 
         /// <summary>
         /// The layer type.
         /// </summary>
-        public TiledLayerType type;
+        public TiledLayerType Type { get; set; }
 
         /// <summary>
         /// The tint color set by the user in hex code
         /// </summary>
-        public string tintcolor;
+        public string Tintcolor { get; set; }
 
         /// <summary>
         /// Defines if the layer is visible in the editor
         /// </summary>
-        public bool visible;
+        public bool Visible { get; set; }
 
         /// <summary>
         /// Is true when the layer is locked
         /// </summary>
-        public bool locked;
+        public bool Locked { get; set; }
 
         /// <summary>
         /// The horizontal offset
         /// </summary>
-        public float offsetX;
+        public float OffsetX { get; set; }
 
         /// <summary>
         /// The vertical offset
         /// </summary>
-        public float offsetY;
+        public float OffsetY { get; set; }
 
         /// <summary>
         /// The parallax x position
         /// </summary>
-        public float parallaxX;
+        public float ParallaxX { get; set; }
 
         /// <summary>
         /// The parallax y position
         /// </summary>
-        public float parallaxY;
+        public float ParallaxY { get; set; }
 
         /// <summary>
         /// The layer opacity
         /// </summary>
-        public float opacity;
+        public float Opacity { get; set; }
 
         /// <summary>
         /// The layer class
         /// </summary>
-        public string @class;
+        public string Class { get; set; }
 
         /// <summary>
         /// An int array of gid numbers which define which tile is being used where. The length of the array equals the layer width * the layer height. Is null when the layer is not a tilelayer.
         /// </summary>
-        public int[] data;
+        public int[] Data { get; set; }
 
         /// <summary>
         /// A parallel array to data which stores the rotation flags of the tile.
@@ -100,26 +100,26 @@ namespace Tiled.Parsing.Models
         /// bit 1 is (anti) diagonal flip.
         /// Is null when the layer is not a tilelayer.
         /// </summary>
-        public byte[] dataRotationFlags;
+        public byte[] DataRotationFlags { get; set; }
 
         /// <summary>
         /// The list of objects in case of an objectgroup layer. Is null when the layer has no objects.
         /// </summary>
-        public TiledObject[] objects;
+        public TiledObject[] Objects { get; set; }
 
         /// <summary>
         /// The layer properties if set
         /// </summary>
-        public TiledProperty[] properties;
+        public TiledProperty[] Properties { get; set; }
 
         /// <summary>
         /// The image the layer represents when the layer is an image layer
         /// </summary>
-        public TiledImage image;
+        public TiledImage Image { get; set; }
 
         /// <summary>
         /// The chunks of data when the map is infinite
         /// </summary>
-        public TiledChunk[] chunks;
+        public TiledChunk[] Chunks { get; set; }
     }
 }

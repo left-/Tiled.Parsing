@@ -21,11 +21,11 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The tile id within a tileset
         /// </summary>
-        public int tileid;
+        public int Tileid { get; set; }
 
         /// <summary>
         /// The duration in miliseconds
         /// </summary>
-        public int duration;
+        public int Duration { get; set; }
     }
 }

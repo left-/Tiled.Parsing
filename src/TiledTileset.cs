@@ -16,52 +16,63 @@ namespace Tiled.Parsing
         /// The Tiled version used to create this tileset
         /// </summary>
         public string TiledVersion { get; set; }
+
         /// <summary>
         /// The tileset name
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// The tileset class
         /// </summary>
         public string Class { get; set; }
+
         /// <summary>
         /// The tile width in pixels
         /// </summary>
         public int TileWidth { get; set; }
+
         /// <summary>
         /// The tile height in pixels
         /// </summary>
         public int TileHeight { get; set; }
+
         /// <summary>
         /// The total amount of tiles
         /// </summary>
         public int TileCount { get; set; }
+
         /// <summary>
         /// The amount of horizontal tiles
         /// </summary>
         public int Columns { get; set; }
+
         /// <summary>
         /// The image definition used by the tileset
         /// </summary>
         public TiledImage Image { get; set; }
+
         /// <summary>
         /// The amount of spacing between the tiles in pixels
         /// </summary>
         public int Spacing { get; set; }
+
         /// <summary>
         /// The amount of margin between the tiles in pixels
         /// </summary>
         public int Margin { get; set; }
+
         /// <summary>
         /// An array of tile definitions
         /// </summary>
         /// <remarks>Not all tiles within a tileset have definitions. Only those with properties, animations, terrains, ...</remarks>
         public TiledTile[] Tiles { get; set; }
+
         /// <summary>
         /// An array of tileset properties
         /// </summary>
         public TiledProperty[] Properties { get; set; }
-        
+
         /// <summary>
         /// The tile offset in pixels
         /// </summary>
@@ -72,7 +83,6 @@ namespace Tiled.Parsing
         /// </summary>
         public TiledTileset()
         {
-
         }
 
         /// <summary>
@@ -83,21 +93,14 @@ namespace Tiled.Parsing
         public TiledTileset(string path)
         {
             // Check the file
-            if (!File.Exists(path))
-            {
-                throw new TiledException($"{path} not found");
-            }
-            
+            if (!File.Exists(path)) throw new TiledException($"{path} not found");
+
             var content = File.ReadAllText(path);
 
             if (path.EndsWith(".tsx"))
-            {
                 ParseXml(content);
-            }
             else
-            {
                 throw new TiledException("Unsupported file format");
-            }
         }
 
         /// <summary>
@@ -159,8 +162,8 @@ namespace Tiled.Parsing
         private TiledOffset ParseOffset(XmlNode node)
         {
             var tiledOffset = new TiledOffset();
-            tiledOffset.x = int.Parse(node.Attributes["x"].Value);
-            tiledOffset.y = int.Parse(node.Attributes["y"].Value);
+            tiledOffset.X = int.Parse(node.Attributes["x"].Value);
+            tiledOffset.Y = int.Parse(node.Attributes["y"].Value);
 
             return tiledOffset;
         }
@@ -168,9 +171,9 @@ namespace Tiled.Parsing
         private TiledImage ParseImage(XmlNode node)
         {
             var tiledImage = new TiledImage();
-            tiledImage.source = node.Attributes["source"].Value;
-            tiledImage.width = int.Parse(node.Attributes["width"].Value);
-            tiledImage.height = int.Parse(node.Attributes["height"].Value);
+            tiledImage.Source = node.Attributes["source"].Value;
+            tiledImage.Width = int.Parse(node.Attributes["width"].Value);
+            tiledImage.Height = int.Parse(node.Attributes["height"].Value);
 
             return tiledImage;
         }
@@ -182,12 +185,12 @@ namespace Tiled.Parsing
             foreach (XmlNode node in nodeList)
             {
                 var animation = new TiledTileAnimation();
-                animation.tileid = int.Parse(node.Attributes["tileid"].Value);
-                animation.duration = int.Parse(node.Attributes["duration"].Value);
-                
+                animation.Tileid = int.Parse(node.Attributes["tileid"].Value);
+                animation.Duration = int.Parse(node.Attributes["duration"].Value);
+
                 result.Add(animation);
             }
-            
+
             return result.ToArray();
         }
 
@@ -200,24 +203,21 @@ namespace Tiled.Parsing
                 var attrType = node.Attributes["type"];
 
                 var property = new TiledProperty();
-                property.name = node.Attributes["name"].Value;
-                property.value = node.Attributes["value"]?.Value;
-                property.type = TiledPropertyType.String;
+                property.Name = node.Attributes["name"].Value;
+                property.Value = node.Attributes["value"]?.Value;
+                property.Type = TiledPropertyType.String;
 
                 if (attrType != null)
                 {
-                    if (attrType.Value == "bool") property.type = TiledPropertyType.Bool;
-                    if (attrType.Value == "color") property.type = TiledPropertyType.Color;
-                    if (attrType.Value == "file") property.type = TiledPropertyType.File;
-                    if (attrType.Value == "float") property.type = TiledPropertyType.Float;
-                    if (attrType.Value == "int") property.type = TiledPropertyType.Int;
-                    if (attrType.Value == "object") property.type = TiledPropertyType.Object;
+                    if (attrType.Value == "bool") property.Type = TiledPropertyType.Bool;
+                    if (attrType.Value == "color") property.Type = TiledPropertyType.Color;
+                    if (attrType.Value == "file") property.Type = TiledPropertyType.File;
+                    if (attrType.Value == "float") property.Type = TiledPropertyType.Float;
+                    if (attrType.Value == "int") property.Type = TiledPropertyType.Int;
+                    if (attrType.Value == "object") property.Type = TiledPropertyType.Object;
                 }
 
-                if (property.value == null)
-                {
-                    property.value = node.InnerText;
-                }
+                if (property.Value == null) property.Value = node.InnerText;
 
                 result.Add(property);
             }
@@ -237,22 +237,22 @@ namespace Tiled.Parsing
                 var nodeImage = node.SelectSingleNode("image");
 
                 var tile = new TiledTile();
-                tile.id = int.Parse(node.Attributes["id"].Value);
-                tile.@class = node.Attributes["class"]?.Value;
-                tile.type = node.Attributes["type"]?.Value;
-                tile.terrain = node.Attributes["terrain"]?.Value.Split(',').AsIntArray();
-                tile.properties = ParseProperties(nodesProperty);
-                tile.animation = ParseAnimations(nodesAnimation);
-                tile.objects = ParseObjects(nodesObject);
+                tile.Id = int.Parse(node.Attributes["id"].Value);
+                tile.Class = node.Attributes["class"]?.Value;
+                tile.Type = node.Attributes["type"]?.Value;
+                tile.Terrain = node.Attributes["terrain"]?.Value.Split(',').AsIntArray();
+                tile.Properties = ParseProperties(nodesProperty);
+                tile.Animation = ParseAnimations(nodesAnimation);
+                tile.Objects = ParseObjects(nodesObject);
 
                 if (nodeImage != null)
                 {
                     var tileImage = new TiledImage();
-                    tileImage.width = int.Parse(nodeImage.Attributes["width"].Value);
-                    tileImage.height = int.Parse(nodeImage.Attributes["height"].Value);
-                    tileImage.source = nodeImage.Attributes["source"].Value;
+                    tileImage.Width = int.Parse(nodeImage.Attributes["width"].Value);
+                    tileImage.Height = int.Parse(nodeImage.Attributes["height"].Value);
+                    tileImage.Source = nodeImage.Attributes["source"].Value;
 
-                    tile.image = tileImage;
+                    tile.Image = tileImage;
                 }
 
                 result.Add(tile);
@@ -260,7 +260,7 @@ namespace Tiled.Parsing
 
             return result.ToArray();
         }
-        
+
         private TiledObject[] ParseObjects(XmlNodeList nodeList)
         {
             var result = new List<TiledObject>();
@@ -273,18 +273,15 @@ namespace Tiled.Parsing
                 var nodeEllipse = node.SelectSingleNode("ellipse");
 
                 var obj = new TiledObject();
-                obj.id = int.Parse(node.Attributes["id"].Value);
-                obj.name = node.Attributes["name"]?.Value;
-                obj.@class = node.Attributes["class"]?.Value;
-                obj.type = node.Attributes["type"]?.Value;
-                obj.gid = int.Parse(node.Attributes["gid"]?.Value ?? "0");
-                obj.x = float.Parse(node.Attributes["x"].Value, CultureInfo.InvariantCulture);
-                obj.y = float.Parse(node.Attributes["y"].Value, CultureInfo.InvariantCulture);
+                obj.Id = int.Parse(node.Attributes["id"].Value);
+                obj.Name = node.Attributes["name"]?.Value;
+                obj.Class = node.Attributes["class"]?.Value;
+                obj.Type = node.Attributes["type"]?.Value;
+                obj.Gid = int.Parse(node.Attributes["gid"]?.Value ?? "0");
+                obj.X = float.Parse(node.Attributes["x"].Value, CultureInfo.InvariantCulture);
+                obj.Y = float.Parse(node.Attributes["y"].Value, CultureInfo.InvariantCulture);
 
-                if (nodesProperty != null)
-                {
-                    obj.properties = ParseProperties(nodesProperty);
-                }
+                if (nodesProperty != null) obj.Properties = ParseProperties(nodesProperty);
 
                 if (nodePolygon != null)
                 {
@@ -292,41 +289,31 @@ namespace Tiled.Parsing
                     var vertices = points.Split(' ');
 
                     var polygon = new TiledPolygon();
-                    polygon.points = new float[vertices.Length * 2];
+                    polygon.Points = new float[vertices.Length * 2];
 
                     for (var i = 0; i < vertices.Length; i++)
                     {
-                        polygon.points[(i * 2) + 0] = float.Parse(vertices[i].Split(',')[0], CultureInfo.InvariantCulture);
-                        polygon.points[(i * 2) + 1] = float.Parse(vertices[i].Split(',')[1], CultureInfo.InvariantCulture);
+                        polygon.Points[i * 2 + 0] =
+                            float.Parse(vertices[i].Split(',')[0], CultureInfo.InvariantCulture);
+                        polygon.Points[i * 2 + 1] =
+                            float.Parse(vertices[i].Split(',')[1], CultureInfo.InvariantCulture);
                     }
 
-                    obj.polygon = polygon;
+                    obj.Polygon = polygon;
                 }
 
-                if (nodeEllipse != null)
-                {
-                    obj.ellipse = new TiledEllipse();
-                }
+                if (nodeEllipse != null) obj.Ellipse = new TiledEllipse();
 
-                if (nodePoint != null)
-                {
-                    obj.point = new TiledPoint();
-                }
+                if (nodePoint != null) obj.Point = new TiledPoint();
 
                 if (node.Attributes["width"] != null)
-                {
-                    obj.width = float.Parse(node.Attributes["width"].Value, CultureInfo.InvariantCulture);
-                }
+                    obj.Width = float.Parse(node.Attributes["width"].Value, CultureInfo.InvariantCulture);
 
                 if (node.Attributes["height"] != null)
-                {
-                    obj.height = float.Parse(node.Attributes["height"].Value, CultureInfo.InvariantCulture);
-                }
+                    obj.Height = float.Parse(node.Attributes["height"].Value, CultureInfo.InvariantCulture);
 
                 if (node.Attributes["rotation"] != null)
-                {
-                    obj.rotation = float.Parse(node.Attributes["rotation"].Value, CultureInfo.InvariantCulture);
-                }
+                    obj.Rotation = float.Parse(node.Attributes["rotation"].Value, CultureInfo.InvariantCulture);
 
                 result.Add(obj);
             }

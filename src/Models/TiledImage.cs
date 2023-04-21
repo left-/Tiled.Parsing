@@ -21,16 +21,16 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The image width
         /// </summary>
-        public int width;
+        public int Width { get; set; }
 
         /// <summary>
         /// The image height
         /// </summary>
-        public int height;
+        public int Height { get; set; }
 
         /// <summary>
         /// The image source path
         /// </summary>
-        public string source;
+        public string Source { get; set; }
     }
 }

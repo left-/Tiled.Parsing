@@ -118,8 +118,8 @@ namespace Tiled.Parsing
             for (var i = 0; i < Tilesets.Length; i++)
                 if (i < Tilesets.Length - 1)
                 {
-                    var gid1 = Tilesets[i + 0].firstgid;
-                    var gid2 = Tilesets[i + 1].firstgid;
+                    var gid1 = Tilesets[i + 0].FirstGid;
+                    var gid2 = Tilesets[i + 1].FirstGid;
 
                     if (gid >= gid1 && gid < gid2) return Tilesets[i];
                 }
@@ -146,12 +146,12 @@ namespace Tiled.Parsing
 
             foreach (var mapTileset in Tilesets)
             {
-                var path = $"{srcFolder}/{mapTileset.source}";
+                var path = $"{srcFolder}/{mapTileset.Source}";
 
-                if (mapTileset.source == null) continue;
+                if (mapTileset.Source == null) continue;
 
                 if (File.Exists(path))
-                    tilesets.Add(mapTileset.firstgid, new TiledTileset(path));
+                    tilesets.Add(mapTileset.FirstGid, new TiledTileset(path));
                 else
                     throw new TiledException("Cannot locate tileset '" + path +
                                              "'. Please make sure the source folder is correct and it ends with a slash.");
@@ -172,7 +172,7 @@ namespace Tiled.Parsing
         {
             foreach (var tile in tileset.Tiles)
             {
-                if (tile.id == gid - mapTileset.firstgid) return tile;
+                if (tile.Id == gid - mapTileset.FirstGid) return tile;
             }
 
             return null;
@@ -192,13 +192,13 @@ namespace Tiled.Parsing
 
             for (var i = 0; i < tileset.TileCount; i++)
             {
-                if (i == gid - mapTileset.firstgid)
+                if (i == gid - mapTileset.FirstGid)
                 {
                     var result = new TiledSourceRect();
-                    result.x = tileHor * tileset.TileWidth;
-                    result.y = tileVert * tileset.TileHeight;
-                    result.width = tileset.TileWidth;
-                    result.height = tileset.TileHeight;
+                    result.X = tileHor * tileset.TileWidth;
+                    result.Y = tileVert * tileset.TileHeight;
+                    result.Width = tileset.TileWidth;
+                    result.Height = tileset.TileHeight;
 
                     return result;
                 }
@@ -206,7 +206,7 @@ namespace Tiled.Parsing
                 // Update x and y position
                 tileHor++;
 
-                if (tileHor == tileset.Image.width / tileset.TileWidth)
+                if (tileHor == tileset.Image.Width / tileset.TileWidth)
                 {
                     tileHor = 0;
                     tileVert++;
@@ -225,10 +225,10 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public bool IsTileFlippedHorizontal(TiledLayer layer, int tileHor, int tileVert)
         {
-            if (layer.type != TiledLayerType.TileLayer)
+            if (layer.Type != TiledLayerType.TileLayer)
                 throw new TiledException("Retrieving tile flipped state for a tile does not work for non-tile layers");
 
-            return IsTileFlippedHorizontal(layer, tileHor + tileVert * layer.width);
+            return IsTileFlippedHorizontal(layer, tileHor + tileVert * layer.Width);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace Tiled.Parsing
         /// <param name="dataIndex">An index of the TiledLayer.data array</param>
         /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public bool IsTileFlippedHorizontal(TiledLayer layer, int dataIndex)
-            => (layer.dataRotationFlags[dataIndex] & (FlippedHorizontallyFlag >> ShiftFlipFlagToByte)) > 0;
+            => (layer.DataRotationFlags[dataIndex] & (FlippedHorizontallyFlag >> ShiftFlipFlagToByte)) > 0;
 
         /// <summary>
         /// Checks is a tile linked to an object is flipped horizontally
@@ -247,9 +247,9 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public bool IsTileFlippedHorizontal(TiledObject tiledObject)
         {
-            if (tiledObject.gid == 0) throw new TiledException("Tiled object not linked to a tile");
+            if (tiledObject.Gid == 0) throw new TiledException("Tiled object not linked to a tile");
 
-            return (tiledObject.dataRotationFlag & (FlippedHorizontallyFlag >> ShiftFlipFlagToByte)) > 0;
+            return (tiledObject.DataRotationFlag & (FlippedHorizontallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
 
         /// <summary>
@@ -261,10 +261,10 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped vertically or False if not</returns>
         public bool IsTileFlippedVertical(TiledLayer layer, int tileHor, int tileVert)
         {
-            if (layer.type != TiledLayerType.TileLayer)
+            if (layer.Type != TiledLayerType.TileLayer)
                 throw new TiledException("Retrieving tile flipped state for a tile does not work for non-tile layers");
 
-            return IsTileFlippedVertical(layer, tileHor + tileVert * layer.width);
+            return IsTileFlippedVertical(layer, tileHor + tileVert * layer.Width);
         }
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace Tiled.Parsing
         /// <param name="dataIndex">An index of the TiledLayer.data array</param>
         /// <returns>True if the tile was flipped vertically or False if not</returns>
         public bool IsTileFlippedVertical(TiledLayer layer, int dataIndex)
-            => (layer.dataRotationFlags[dataIndex] & (FlippedVerticallyFlag >> ShiftFlipFlagToByte)) > 0;
+            => (layer.DataRotationFlags[dataIndex] & (FlippedVerticallyFlag >> ShiftFlipFlagToByte)) > 0;
 
         /// <summary>
         /// Checks is a tile linked to an object is flipped vertically
@@ -284,9 +284,9 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public bool IsTileFlippedVertical(TiledObject tiledObject)
         {
-            if (tiledObject.gid == 0) throw new TiledException("Tiled object not linked to a tile");
+            if (tiledObject.Gid == 0) throw new TiledException("Tiled object not linked to a tile");
 
-            return (tiledObject.dataRotationFlag & (FlippedVerticallyFlag >> ShiftFlipFlagToByte)) > 0;
+            return (tiledObject.DataRotationFlag & (FlippedVerticallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
 
         /// <summary>
@@ -298,10 +298,10 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped diagonally or False if not</returns>
         public bool IsTileFlippedDiagonal(TiledLayer layer, int tileHor, int tileVert)
         {
-            if (layer.type != TiledLayerType.TileLayer)
+            if (layer.Type != TiledLayerType.TileLayer)
                 throw new TiledException("Retrieving tile flipped state for a tile does not work for non-tile layers");
 
-            return IsTileFlippedDiagonal(layer, tileHor + tileVert * layer.width);
+            return IsTileFlippedDiagonal(layer, tileHor + tileVert * layer.Width);
         }
 
         /// <summary>
@@ -311,7 +311,7 @@ namespace Tiled.Parsing
         /// <param name="dataIndex">An index of the TiledLayer.data array</param>
         /// <returns>True if the tile was flipped diagonally or False if not</returns>
         public bool IsTileFlippedDiagonal(TiledLayer layer, int dataIndex)
-            => (layer.dataRotationFlags[dataIndex] & (FlippedDiagonallyFlag >> ShiftFlipFlagToByte)) > 0;
+            => (layer.DataRotationFlags[dataIndex] & (FlippedDiagonallyFlag >> ShiftFlipFlagToByte)) > 0;
 
         /// <summary>
         /// Checks is a tile linked to an object is flipped diagonally
@@ -320,9 +320,9 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public bool IsTileFlippedDiagonal(TiledObject tiledObject)
         {
-            if (tiledObject.gid == 0) throw new TiledException("Tiled object not linked to a tile");
+            if (tiledObject.Gid == 0) throw new TiledException("Tiled object not linked to a tile");
 
-            return (tiledObject.dataRotationFlag & (FlippedDiagonallyFlag >> ShiftFlipFlagToByte)) > 0;
+            return (tiledObject.DataRotationFlag & (FlippedDiagonallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
     }
 }

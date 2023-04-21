@@ -21,41 +21,41 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The group's id
         /// </summary>
-        public int id;
+        public int Id { get; set; }
 
         /// <summary>
         /// The group's name
         /// </summary>
-        public string name;
+        public string Name { get; set; }
 
         /// <summary>
         /// The group's visibility
         /// </summary>
-        public bool visible;
+        public bool Visible { get; set; }
 
         /// <summary>
         /// The group's locked state
         /// </summary>
-        public bool locked;
+        public bool Locked { get; set; }
 
         /// <summary>
         /// The group's user properties
         /// </summary>
-        public TiledProperty[] properties;
+        public TiledProperty[] Properties { get; set; }
 
         /// <summary>
         /// The group's layers
         /// </summary>
-        public TiledLayer[] layers;
+        public TiledLayer[] Layers { get; set; }
 
         /// <summary>
         /// The group's objects
         /// </summary>
-        public TiledObject[] objects;
+        public TiledObject[] Objects { get; set; }
 
         /// <summary>
         /// The group's subgroups
         /// </summary>
-        public TiledGroup[] groups;
+        public TiledGroup[] Groups { get; set; }
     }
 }

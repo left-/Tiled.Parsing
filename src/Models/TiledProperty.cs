@@ -21,16 +21,16 @@ namespace Tiled.Parsing.Models
         /// <summary>
         /// The property name or key in string format
         /// </summary>
-        public string name;
+        public string Name { get; set; }
 
         /// <summary>
         /// The property type as used in Tiled. Can be bool, number, string, ...
         /// </summary>
-        public TiledPropertyType type;
+        public TiledPropertyType Type { get; set; }
 
         /// <summary>
         /// The value in string format
         /// </summary>
-        public string value;
+        public string Value { get; set; }
     }
 }
