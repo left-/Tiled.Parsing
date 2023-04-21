@@ -1,6 +1,6 @@
 using System;
 
-namespace TiledCS
+namespace Tiled.Parsing
 {
     /// <summary>
     /// Represents an exception only thrown by TiledCS

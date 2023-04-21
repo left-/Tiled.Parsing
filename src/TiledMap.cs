@@ -4,7 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Xml;
-using TiledCS;
+using Tiled.Parsing.Models;
 
 namespace Tiled.Parsing
 {
@@ -13,15 +13,15 @@ namespace Tiled.Parsing
     /// </summary>
     public class TiledMap
     {
-        const uint FLIPPED_HORIZONTALLY_FLAG = 0b10000000000000000000000000000000;
-        const uint FLIPPED_VERTICALLY_FLAG = 0b01000000000000000000000000000000;
-        const uint FLIPPED_DIAGONALLY_FLAG = 0b00100000000000000000000000000000;
+        const uint FlippedHorizontallyFlag = 0b10000000000000000000000000000000;
+        const uint FlippedVerticallyFlag = 0b01000000000000000000000000000000;
+        const uint FlippedDiagonallyFlag = 0b00100000000000000000000000000000;
 
         /// <summary>
         /// How many times we shift the FLIPPED flags to the right in order to store it in a byte.
         /// For example: 0b10100000000000000000000000000000 >> SHIFT_FLIP_FLAG_TO_BYTE = 0b00000101
         /// </summary>
-        const int SHIFT_FLIP_FLAG_TO_BYTE = 29;
+        const int ShiftFlipFlagToByte = 29;
 
         /// <summary>
         /// Returns the Tiled version used to create this map
@@ -405,13 +405,13 @@ namespace Tiled.Parsing
                     {
                         base64DataStream.Read(rawBytes, 0, rawBytes.Length);
                         var rawID = BitConverter.ToUInt32(rawBytes, 0);
-                        var hor = ((rawID & FLIPPED_HORIZONTALLY_FLAG));
-                        var ver = ((rawID & FLIPPED_VERTICALLY_FLAG));
-                        var dia = ((rawID & FLIPPED_DIAGONALLY_FLAG));
-                        dataRotationFlags[i] = (byte)((hor | ver | dia) >> SHIFT_FLIP_FLAG_TO_BYTE);
+                        var hor = ((rawID & FlippedHorizontallyFlag));
+                        var ver = ((rawID & FlippedVerticallyFlag));
+                        var dia = ((rawID & FlippedDiagonallyFlag));
+                        dataRotationFlags[i] = (byte)((hor | ver | dia) >> ShiftFlipFlagToByte);
 
                         // assign data to rawID with the rotation flags cleared
-                        data[i] = (int)(rawID & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG));
+                        data[i] = (int)(rawID & ~(FlippedHorizontallyFlag | FlippedVerticallyFlag | FlippedDiagonallyFlag));
                     }
                 }
                 else if (compression == "zlib")
@@ -432,13 +432,13 @@ namespace Tiled.Parsing
                         while (decompressionStream.Read(decompressedDataBuffer, 0, decompressedDataBuffer.Length) == decompressedDataBuffer.Length)
                         {
                             var rawID = BitConverter.ToUInt32(decompressedDataBuffer, 0);
-                            var hor = ((rawID & FLIPPED_HORIZONTALLY_FLAG));
-                            var ver = ((rawID & FLIPPED_VERTICALLY_FLAG));
-                            var dia = ((rawID & FLIPPED_DIAGONALLY_FLAG));
-                            dataRotationFlagsList.Add((byte)((hor | ver | dia) >> SHIFT_FLIP_FLAG_TO_BYTE));
+                            var hor = ((rawID & FlippedHorizontallyFlag));
+                            var ver = ((rawID & FlippedVerticallyFlag));
+                            var dia = ((rawID & FlippedDiagonallyFlag));
+                            dataRotationFlagsList.Add((byte)((hor | ver | dia) >> ShiftFlipFlagToByte));
 
                             // assign data to rawID with the rotation flags cleared
-                            layerDataList.Add((int)(rawID & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)));
+                            layerDataList.Add((int)(rawID & ~(FlippedHorizontallyFlag | FlippedVerticallyFlag | FlippedDiagonallyFlag)));
                         }
 
                         data = layerDataList.ToArray();
@@ -457,14 +457,14 @@ namespace Tiled.Parsing
                         while (decompressionStream.Read(decompressedDataBuffer, 0, decompressedDataBuffer.Length) == decompressedDataBuffer.Length)
                         {
                             var rawID = BitConverter.ToUInt32(decompressedDataBuffer, 0);
-                            var hor = ((rawID & FLIPPED_HORIZONTALLY_FLAG));
-                            var ver = ((rawID & FLIPPED_VERTICALLY_FLAG));
-                            var dia = ((rawID & FLIPPED_DIAGONALLY_FLAG));
+                            var hor = ((rawID & FlippedHorizontallyFlag));
+                            var ver = ((rawID & FlippedVerticallyFlag));
+                            var dia = ((rawID & FlippedDiagonallyFlag));
 
-                            dataRotationFlagsList.Add((byte)((hor | ver | dia) >> SHIFT_FLIP_FLAG_TO_BYTE));
+                            dataRotationFlagsList.Add((byte)((hor | ver | dia) >> ShiftFlipFlagToByte));
 
                             // assign data to rawID with the rotation flags cleared
-                            layerDataList.Add((int)(rawID & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG)));
+                            layerDataList.Add((int)(rawID & ~(FlippedHorizontallyFlag | FlippedVerticallyFlag | FlippedDiagonallyFlag)));
                         }
 
                         data = layerDataList.ToArray();
@@ -489,13 +489,13 @@ namespace Tiled.Parsing
             for (var i = 0; i < csvs.Length; i++)
             {
                 var rawID = uint.Parse(csvs[i]);
-                var hor = ((rawID & FLIPPED_HORIZONTALLY_FLAG));
-                var ver = ((rawID & FLIPPED_VERTICALLY_FLAG));
-                var dia = ((rawID & FLIPPED_DIAGONALLY_FLAG));
-                dataRotationFlags[i] = (byte)((hor | ver | dia) >> SHIFT_FLIP_FLAG_TO_BYTE);
+                var hor = ((rawID & FlippedHorizontallyFlag));
+                var ver = ((rawID & FlippedVerticallyFlag));
+                var dia = ((rawID & FlippedDiagonallyFlag));
+                dataRotationFlags[i] = (byte)((hor | ver | dia) >> ShiftFlipFlagToByte);
 
                 // assign data to rawID with the rotation flags cleared
-                data[i] = (int)(rawID & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG));
+                data[i] = (int)(rawID & ~(FlippedHorizontallyFlag | FlippedVerticallyFlag | FlippedDiagonallyFlag));
             }
         }
 
@@ -590,12 +590,12 @@ namespace Tiled.Parsing
         private void ParseObjectGid(ref TiledObject tiledObject, String gid)
         {
             var rawID = uint.Parse(gid);
-            var hor = ((rawID & FLIPPED_HORIZONTALLY_FLAG));
-            var ver = ((rawID & FLIPPED_VERTICALLY_FLAG));
-            var dia = ((rawID & FLIPPED_DIAGONALLY_FLAG));
+            var hor = ((rawID & FlippedHorizontallyFlag));
+            var ver = ((rawID & FlippedVerticallyFlag));
+            var dia = ((rawID & FlippedDiagonallyFlag));
             
-            tiledObject.dataRotationFlag = (byte)((hor | ver | dia) >> SHIFT_FLIP_FLAG_TO_BYTE);
-            tiledObject.gid = (int)(rawID & ~(FLIPPED_HORIZONTALLY_FLAG | FLIPPED_VERTICALLY_FLAG | FLIPPED_DIAGONALLY_FLAG));
+            tiledObject.dataRotationFlag = (byte)((hor | ver | dia) >> ShiftFlipFlagToByte);
+            tiledObject.gid = (int)(rawID & ~(FlippedHorizontallyFlag | FlippedVerticallyFlag | FlippedDiagonallyFlag));
         }
 
         /* HELPER METHODS */
@@ -754,7 +754,7 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped horizontally or False if not</returns>
         public bool IsTileFlippedHorizontal(TiledLayer layer, int dataIndex)
         {
-            return (layer.dataRotationFlags[dataIndex] & (FLIPPED_HORIZONTALLY_FLAG >> SHIFT_FLIP_FLAG_TO_BYTE)) > 0;
+            return (layer.dataRotationFlags[dataIndex] & (FlippedHorizontallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
         
         /// <summary>
@@ -769,7 +769,7 @@ namespace Tiled.Parsing
                 throw new TiledException("Tiled object not linked to a tile");
             }
             
-            return (tiledObject.dataRotationFlag & (FLIPPED_HORIZONTALLY_FLAG >> SHIFT_FLIP_FLAG_TO_BYTE)) > 0;
+            return (tiledObject.dataRotationFlag & (FlippedHorizontallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
 
         /// <summary>
@@ -797,7 +797,7 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped vertically or False if not</returns>
         public bool IsTileFlippedVertical(TiledLayer layer, int dataIndex)
         {
-            return (layer.dataRotationFlags[dataIndex] & (FLIPPED_VERTICALLY_FLAG >> SHIFT_FLIP_FLAG_TO_BYTE)) > 0;
+            return (layer.dataRotationFlags[dataIndex] & (FlippedVerticallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
         
         /// <summary>
@@ -813,7 +813,7 @@ namespace Tiled.Parsing
                 throw new TiledException("Tiled object not linked to a tile");
             }
             
-            return (tiledObject.dataRotationFlag & (FLIPPED_VERTICALLY_FLAG >> SHIFT_FLIP_FLAG_TO_BYTE)) > 0;
+            return (tiledObject.dataRotationFlag & (FlippedVerticallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
 
         /// <summary>
@@ -841,7 +841,7 @@ namespace Tiled.Parsing
         /// <returns>True if the tile was flipped diagonally or False if not</returns>
         public bool IsTileFlippedDiagonal(TiledLayer layer, int dataIndex)
         {
-            return (layer.dataRotationFlags[dataIndex] & (FLIPPED_DIAGONALLY_FLAG >> SHIFT_FLIP_FLAG_TO_BYTE)) > 0;
+            return (layer.dataRotationFlags[dataIndex] & (FlippedDiagonallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
         
         /// <summary>
@@ -856,7 +856,7 @@ namespace Tiled.Parsing
                 throw new TiledException("Tiled object not linked to a tile");
             }
             
-            return (tiledObject.dataRotationFlag & (FLIPPED_DIAGONALLY_FLAG >> SHIFT_FLIP_FLAG_TO_BYTE)) > 0;
+            return (tiledObject.dataRotationFlag & (FlippedDiagonallyFlag >> ShiftFlipFlagToByte)) > 0;
         }
     }
 }

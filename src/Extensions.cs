@@ -16,6 +16,7 @@ namespace Tiled.Parsing
         {
             return src.Select(x => int.Parse(x.ToString().Length == 0 ? "-1" : x.ToString())).ToArray();
         }
+
         /// <summary>
         /// Converts a string array whose values are actually all numbers to an int array
         /// </summary>
