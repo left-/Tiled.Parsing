@@ -1,6 +1,6 @@
 # Tiled.Parsing
 
-Tiled.ParsingCS is a .NET library for loading Tiled maps and tilesets. It supports only the _TMX_ and _TSX_ file
+Tiled.Parsing is a .NET library for loading Tiled maps and tilesets. It supports only the _TMX_ and _TSX_ file
 formats. The library requires no 3rd-party dependencies. This way the library can be used with popular game engines like
 Unity3D, MonoGame and Godot.
 
